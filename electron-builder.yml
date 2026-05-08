@@ -2,6 +2,7 @@ appId: party.mihomo.app
 productName: Clash Party
 directories:
   buildResources: build
+  output: dist
 files:
   - '!**/.vscode/*'
   - '!src/*'
@@ -38,6 +39,8 @@ nsis:
 mac:
   target:
     - pkg
+  executableName: Clash Party
+  category: public.app-category.utilities
   entitlementsInherit: build/entitlements.mac.plist
   hardenedRuntime: true
   gatekeeperAssess: false
@@ -47,7 +50,7 @@ mac:
     - NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
     - NSDownloadsFolderUsageDescription: Application requests access to the user's Downloads folder.
   notarize: false
-  artifactName: clash-party-macos-${version}-${arch}.${ext}
+  artifactName: Clash-Party-MacOS-${version}-${arch}.${ext}
 pkg:
   allowAnywhere: false
   allowCurrentUserHome: false

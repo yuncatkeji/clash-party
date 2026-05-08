@@ -70,7 +70,7 @@ async function getLatestSmartVersion() {
     console.log(`Latest smart version: ${MIHOMO_SMART_VERSION}`)
   } catch (error) {
     console.error('Error fetching latest smart version:', error.message)
-    process.exit(1)
+    throw error
   }
 }
 
@@ -469,17 +469,19 @@ const tasks = [
   {
     name: 'mihomo-smart',
     func: () => getLatestSmartVersion().then(() => resolveSidecar(mihomoSmart())),
-    retry: 5
+    retry: 5,
+    optional: true
   },
-  { name: 'mmdb', func: resolveMmdb, retry: 5 },
-  { name: 'metadb', func: resolveMetadb, retry: 5 },
-  { name: 'geosite', func: resolveGeosite, retry: 5 },
-  { name: 'geoip', func: resolveGeoIP, retry: 5 },
-  { name: 'asn', func: resolveASN, retry: 5 },
+  { name: 'mmdb', func: resolveMmdb, retry: 5, optional: true },
+  { name: 'metadb', func: resolveMetadb, retry: 5, optional: true },
+  { name: 'geosite', func: resolveGeosite, retry: 5, optional: true },
+  { name: 'geoip', func: resolveGeoIP, retry: 5, optional: true },
+  { name: 'asn', func: resolveASN, retry: 5, optional: true },
   {
     name: 'font',
     func: resolveFont,
-    retry: 5
+    retry: 5,
+    optional: true
   },
   {
     name: 'enableLoopback',
@@ -496,17 +498,20 @@ const tasks = [
     name: 'monitor',
     func: resolveMonitor,
     retry: 5,
-    winOnly: true
+    winOnly: true,
+    optional: true
   },
   {
     name: 'substore',
     func: resolveSubstore,
-    retry: 5
+    retry: 5,
+    optional: true
   },
   {
     name: 'substorefrontend',
     func: resolveSubstoreFrontend,
-    retry: 5
+    retry: 5,
+    optional: true
   },
   {
     name: '7zip',
